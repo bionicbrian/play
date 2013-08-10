@@ -1,5 +1,7 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    h1 SOME THINGS I'VE BEEN PLAYING WITH
+    each name in projects
+        h2
+            a(href="/#{name}")= name.toUpperCase()

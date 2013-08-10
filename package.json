@@ -1,5 +1,5 @@
 {
-  "name": "application-name",
+  "name": "bionicbrian-play",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -8,6 +8,15 @@
   "dependencies": {
     "express": "3.3.4",
     "jade": "*",
-    "stylus": "*"
+    "stylus": "*",
+    "jquery": "~1.8.3",
+    "underscore": "~1.5.1"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.2",
+    "grunt-contrib-uglify": "~0.2.2",
+    "mocha": "~1.12.0",
+    "browserify": "~2.26.0"
   }
 }
