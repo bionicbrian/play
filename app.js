@@ -29,7 +29,7 @@ if ('development' == app.get('env')) {
 app.use(bimodal);
 
 app.get("/", function (req, res) {
-    res.render("index", { projects: projects });
+    res.render("index", { hideNav: true, projects: projects });
 });
 
 http.createServer(app).listen(app.get('port'), function(){
