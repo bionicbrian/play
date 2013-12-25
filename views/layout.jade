@@ -1,14 +1,15 @@
 doctype 5
 html
-  // ALL WE NEED IS LOVE.
   // THIS LITTLE SITE CONSTRUCTED BY BRIAN MOORE WITH LOVE.
   head
-    title BIONICBRIAN | PLAY
+    title bionicbrian
+      if projectName
+        &nbsp;| #{projectName}
     link(rel="stylesheet", href="/css/style.css")
     script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
     script(src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.1/underscore-min.js")
   body
-    if !hideNav
+    if projectName
         .navigator
-            a(href="/") &larr; &bull; &bull; &bull;
+            a(href="/") &larr; &bull; &bull; &bull; | #{projectName}
     block content
