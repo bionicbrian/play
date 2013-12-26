@@ -8,11 +8,13 @@ var fs      = require("fs");
 var app     = express();
 
 // Projects
-var dots = require("./projects/dots");
-
 var dirContents = fs.readdirSync("./projects");
-var projects = dirContents.filter(function (dir) {
+var projectNames = dirContents.filter(function (dir) {
     return dir[0] !== ".";
+});
+var projectsMap = {};
+projectNames.forEach(function (projectName) {
+    projectsMap[projectName] = require("./projects/" + projectName);
 });
 
 app.set("port", process.env.PORT || 3000);
@@ -28,17 +30,19 @@ app.use(express.session());
 app.use(app.router);
 
 // Use project specific routes before stylus and static middleware
-app.use(dots);
+projectNames.forEach(function (projectName) {
+    app.use(projectsMap[projectName]);
+});
 
 app.use(stylus.middleware(__dirname + "/public"));
 app.use(express.static(path.join(__dirname, "public")));
 
-if ("development" === app.get("env")) {
+if (app.get("env") === "development") {
     app.use(express.errorHandler());
 }
 
 app.get("/", function (req, res) {
-    res.render("index", { projects: projects });
+    res.render("index", { projects: projectNames });
 });
 
 http.createServer(app).listen(app.get("port"), function () {
