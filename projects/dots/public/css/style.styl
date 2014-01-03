@@ -4,6 +4,28 @@
     h1
         color: #ff9de3
 
+.dot-container
+    position: relative
+    margin-top: 50px
+
+    .dot
+        position: absolute
+        top: 0
+        left: 0
+        width: 100px
+        height: 100px
+        border-radius: 50%
+        background-color: #ff11dc
+        transition: 0.25s 0s cubic-bezier(.5, 1.75, .25, 1.75)
+
+        &:active
+        &:hover
+            top: -25px
+            left: -25px
+            width: 150px
+            height: 150px
+            background-color: #da0dbe
+
 .navigator
     background-color: #ff9de3
     border-bottom: 1px solid #ffc0e2
