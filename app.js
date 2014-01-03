@@ -7,15 +7,8 @@ var path    = require("path");
 var fs      = require("fs");
 var app     = express();
 
-// Projects
-var dirContents = fs.readdirSync("./projects");
-var projectNames = dirContents.filter(function (dir) {
-    return dir[0] !== ".";
-});
-var projectsMap = {};
-projectNames.forEach(function (projectName) {
-    projectsMap[projectName] = require("./projects/" + projectName);
-});
+var projectManager = require("./lib/projectManager");
+var projects = projectManager(app, __dirname + "/projects");
 
 app.set("port", process.env.PORT || 3000);
 app.set("views", __dirname + "/views");
@@ -29,10 +22,8 @@ app.use(express.cookieParser("teo and tinker"));
 app.use(express.session());
 app.use(app.router);
 
-// Use project specific routes before stylus and static middleware
-projectNames.forEach(function (projectName) {
-    app.use(projectsMap[projectName]);
-});
+// Load the project routes BEFORE the stylus middleware
+projects.load(app);
 
 app.use(stylus.middleware(__dirname + "/public"));
 app.use(express.static(path.join(__dirname, "public")));
@@ -42,7 +33,7 @@ if (app.get("env") === "development") {
 }
 
 app.get("/", function (req, res) {
-    res.render("index", { projects: projectNames });
+    res.render("index", { projects: projects.details });
 });
 
 http.createServer(app).listen(app.get("port"), function () {

@@ -2,6 +2,6 @@ extends layout
 
 block content
     h1 SOME THINGS I'VE BEEN PLAYING WITH
-    each name in projects
+    each project in projects
         h2
-            a(href="/#{name}")= name.toUpperCase()
+            a(href="/#{project.route}")= project.title.toUpperCase()
