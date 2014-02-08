@@ -28,3 +28,20 @@ a {
   color: #fff;
   text-decoration: none;
 }
+.main h1 {
+  color: #da4244;
+}
+.navigator {
+  background-color: #ff9d8e;
+  border-bottom: 1px solid #ff6305;
+}
+.navigator a,
+.navigator a:visited,
+.navigator a:active {
+  color: #fff;
+  text-decoration: none;
+}
+.navigator a:hover {
+  color: #fff;
+  text-decoration: none;
+}
